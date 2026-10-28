@@ -1,0 +1,29 @@
+<div class="shell">
+  @if (auth.user()) {
+    <aside class="noprint">
+      <div class="brand">
+        <span class="logo">🛡️</span>
+        <div>SMS Supply<small>Secured Manpower Services</small></div>
+      </div>
+
+      <nav class="menu">
+        <a routerLink="/dashboard" routerLinkActive="on"><span>📊</span>Dashboard</a>
+        <a routerLink="/inventory" routerLinkActive="on"><span>📦</span>Inventory</a>
+        <a routerLink="/employees" routerLinkActive="on"><span>👥</span>Employees</a>
+        <a routerLink="/distribution" routerLinkActive="on"><span>📦</span>Issue supplies</a>
+        <a routerLink="/reports" routerLinkActive="on"><span>📈</span>Reports</a>
+      </nav>
+
+      <div class="spacer"></div>
+
+      <div class="user">
+        <div class="who">{{ auth.user()?.email }}</div>
+        <button (click)="auth.logout()">Log out</button>
+      </div>
+    </aside>
+  }
+
+  <main class="page">
+    <router-outlet />
+  </main>
+</div>
