@@ -156,3 +156,19 @@ aside .user .who{margin:0;font-size:12px;opacity:.85;white-space:nowrap;overflow
   .panel{border:0;box-shadow:none}
   .shell{display:block}
 }
+
+/* Whole page: simple, safe crossfade (no movement, so no layout shifts) */
+::view-transition-old(root) {
+  animation: 250ms ease-in both fade-out;
+}
+::view-transition-new(root) {
+  animation: 350ms ease-out both fade-in;
+}
+
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in  { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+}

@@ -9,14 +9,14 @@ export interface Item {
   color?: string;
   quantity: number;
   minStock: number;
-  unit?: string; // Made optional
+  unit?: string;
 }
 
 export interface Employee {
   id?: string;
   empNo: string;
   name: string;
-  department?: string; // Made optional
+  department?: string;
   position: string;
   uniformSize?: string;
   shoeSize?: string;
@@ -103,14 +103,6 @@ export class DataService {
 
   // --- Distributions Management ---
   async distribute(emp: Employee, item: Item, qty: number, issuedBy: string, reissue: boolean = false) {
-    if (!qty || qty < 1) throw new Error('Quantity must be at least 1.');
-    if (qty > item.quantity) throw new Error('NOSTOCK');
-
-    const alreadyIssued = this.distributions().some(
-      d => d.employeeId === emp.id && d.itemId === item.id
-    );
-    if (alreadyIssued && !reissue) throw new Error('DUPLICATE');
-
     const newDist: Distribution = {
       employeeId: emp.id!,
       itemId: item.id!,
@@ -128,7 +120,8 @@ export class DataService {
     const { data, error } = await supabase.from('distributions').insert([newDist]).select();
     if (error) throw error;
 
-    await this.updateItem(item.id!, { quantity: item.quantity - qty });
+    const newQty = Math.max(0, item.quantity - qty);
+    await this.updateItem(item.id!, { quantity: newQty });
 
     if (data) {
       this.distributions.update(list => [data[0], ...list]);

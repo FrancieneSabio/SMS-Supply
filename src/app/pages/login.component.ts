@@ -11,11 +11,8 @@ import { AuthService } from '../auth.service';
     <div class="wrap">
       <section class="hero">
         <div class="brand">
-          <span class="logo">🛡️</span>
-          <div>
-            <strong>SMS Supply</strong>
-            <small>Secured Manpower Services</small>
-          </div>
+          <img class="logo-img" src="logo.png" alt="SMS Logo" />
+          <small>Secured Manpower Services</small>
         </div>
 
         <div class="pitch">
@@ -33,7 +30,8 @@ import { AuthService } from '../auth.service';
 
       <section class="side">
         <div class="mobile-brand">
-          <span class="logo">🛡️</span> <strong>SMS Supply</strong>
+          <img class="logo-img" src="logo.png" alt="SMS Logo" />
+          <strong>SMS Supply</strong>
         </div>
 
         <div class="card">
@@ -76,17 +74,18 @@ import { AuthService } from '../auth.service';
     .wrap { position: fixed; inset: 0; z-index: 50; display: grid; grid-template-columns: 1.1fr 1fr; background: #f4f8ff; overflow: auto; }
 
     .hero { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
-            padding: 44px 52px; color: #fff; background: linear-gradient(160deg, #0b2a6f 0%, #1d4ed8 60%, #38bdf8 100%); }
-                .hero::before, .hero::after { content: ''; position: absolute; border-radius: 50%; background: rgba(255,255,255,.08); }
-                    .hero::before, .hero::after { content: ''; position: absolute; border-radius: 50%; background: rgba(255,255,255,.08); }
+            padding: 44px 52px; color: #fff; background: linear-gradient(160deg, #0b2a6f 0%, #1d4ed8 60%, #38bdf8 100%);
+            view-transition-name: brand-panel; }
+    .hero::before, .hero::after { content: ''; position: absolute; border-radius: 50%; background: rgba(255,255,255,.08); }
     .hero::before { width: 380px; height: 380px; right: -120px; top: -120px; }
     .hero::after  { width: 260px; height: 260px; left: -90px; bottom: -80px; }
     .hero > * { position: relative; z-index: 1; }
 
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand .logo { font-size: 34px; }
-    .brand strong { display: block; font-size: 20px; }
-    .brand small { opacity: .8; font-size: 12px; }
+    /* identical brand block on login + register */
+    .brand { display: flex; align-items: center; gap: 14px; height: 68px; }
+    .logo-img { width: 68px; height: 68px; flex-shrink: 0; box-sizing: border-box; object-fit: contain;
+                background: #fff; border-radius: 50%; padding: 5px; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+    .brand small { font-size: 13.6px; line-height: 1.2; color: rgba(255,255,255,.75); display: block; }
 
     .pitch h2 { font-size: 34px; line-height: 1.15; margin: 0 0 12px; }
     .pitch p { font-size: 16px; opacity: .9; margin: 0 0 28px; max-width: 380px; }
@@ -96,10 +95,12 @@ import { AuthService } from '../auth.service';
     .foot { opacity: .7; }
 
     .side { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 24px; }
-    .mobile-brand { display: none; align-items: center; gap: 8px; font-size: 20px; margin-bottom: 20px; color: #0b2a6f; }
+    .mobile-brand { display: none; align-items: center; gap: 12px; font-size: 20px; margin-bottom: 20px; color: #0b2a6f; }
+    .mobile-brand .logo-img { width: 72px; height: 72px; border: 2px solid #e3ebfa; box-shadow: 0 4px 12px rgba(29,78,216,.18); }
 
     .card { width: 100%; max-width: 400px; background: #fff; border-radius: 20px; padding: 36px 32px;
-            border: 1px solid #e3ebfa; box-shadow: 0 18px 50px rgba(29, 78, 216, .12); }
+            border: 1px solid #e3ebfa; box-shadow: 0 18px 50px rgba(29, 78, 216, .12);
+            view-transition-name: auth-card; }
     .card h1 { margin: 0; font-size: 26px; color: #0b1b4d; }
     .sub { margin: 6px 0 24px; color: #64748b; }
 

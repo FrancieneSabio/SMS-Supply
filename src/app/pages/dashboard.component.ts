@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DataService, Item } from '../data.service';
@@ -149,13 +149,17 @@ import { DataService, Item } from '../data.service';
         </div>
       </div>
     </div>
-  `,
+  `
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   data = inject(DataService);
   now = signal(new Date());
   refreshing = signal(false);
   private colors = ['#2563eb', '#f97316', '#10b981'];
+
+  ngOnInit() {
+    this.refresh();
+  }
 
   totalStock = computed(() => this.data.items().reduce((s, i) => s + Number(i.quantity), 0));
 
